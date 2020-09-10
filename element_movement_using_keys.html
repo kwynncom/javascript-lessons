@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>moving HTML elements with the keyboard</title>
+
+<style>
+	#theMovingElement {
+		background-color: blue; 
+		width: 10%; 
+		position: relative;
+	}
+</style>
+
+<script> // Kwynn version 12, 2020/09/10 1:18am+
+
+class arrowKeyMovement { // the class is invoked below
+
+constructor(eleid) {
+	const ele = document.getElementById(eleid); 
+	this.movingElementStyle  = ele.style;
+	const self = this; // if you don't use self, then "this" below will be Window from the events and interval calls, rather than "this" the arrowKeyMovement object
+	setInterval(function() { self.calcAndMove(); }, 5); // rather than turning the thing on and off, just set it to run forever
+	addEventListener("keydown", function(event) { self.kh(event); });
+	addEventListener("keyup"  , function(event) { self.kh(event); });
+}
+
+kh(event) {
+	const code = event.code;
+	if (!(code === 'ArrowUp' || code === 'ArrowDown' || code === 'ArrowLeft' || code === 'ArrowRight')) return;
+	const type = event.type;
+	this[code] = type;
+	if (type === 'keyup') {
+		if (this.udl === code) this.udl = false; // udl === up down latest
+		if (this['ArrowUp'  ] === 'keydown') this.udl = 'ArrowUp'  ; 
+		if (this['ArrowDown'] === 'keydown') this.udl = 'ArrowDown'; 
+
+		if (this.lrl === code) this.lrl = false;
+		if (this['ArrowLeft' ] === 'keydown') this.lrl = 'ArrowLeft' ; // left right latest
+		if (this['ArrowRight'] === 'keydown') this.lrl = 'ArrowRight';
+		return;
+	}
+
+	switch(code) {
+		case 'ArrowUp'   : case 'ArrowDown' : this.udl = code; break;
+ 		case 'ArrowLeft' : case 'ArrowRight': this.lrl = code; break;
+	}
+}
+
+calcAndMove() {
+	let dtop = 0;
+	switch(this.udl) {
+		case 'ArrowUp'   : dtop = -1; break;
+		case 'ArrowDown' : dtop =  1; break;
+	}
+	let dleft = 0;
+	switch(this.lrl) {
+ 		case 'ArrowLeft' : dleft = -1; break;
+		case 'ArrowRight': dleft =  1; break;		
+	}
+
+	this.move(dtop, dleft);
+}
+
+move(dtop, dleft) {
+	const style = this.movingElementStyle;
+	if (dtop ) style.top  = (parseInt(style.top , 10) + dtop ) + 'px';
+	if (dleft) style.left = (parseInt(style.left, 10) + dleft) + 'px';
+}
+} // end class
+
+window.onload = function() { new arrowKeyMovement('theMovingElement'); }
+</script>
+</head>
+<body>
+<p>Press the arrow keys to move the blue div.  This probably doesn't work on a phone.  Phones are not this week's lesson.</p>
+
+<!--If I do not define the initial top and left inline, the value does not flow through to the first move() call. -->
+<div id='theMovingElement' style='top: 0px; left: 0px'>move me</div>
+</body>
+</html>
+
