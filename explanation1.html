@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'                      />
+    <meta name='viewport' 		    content='width=device-width, initial-scale=1.0' />
+    
+<!-- This is an HTML comment as delimited to the left / above and below.  The browser does not interpret comments as HTML code.  The comments are 
+for humans to read.  Every software language (that I've ever seen) has some way to make comments.
+
+All of the HTML above this point is boilerplate that is necessary for HTML5 compliance (later lesson) and just a bit to make Google Search happier.
+
+END COMMENT DELIMITER BELOW
+-->
+    
+    <title>JavaScript hello world</title> <!-- the title is the tab name of the page in a browser -->
+    
+    
+    
+<script> // JavaScript begins.  Now you're in JavaScript land, not HTML land, although the two are related.
+// Note that JavaScript delimits comments in 2 ways, both of which are different than HTML.
+        
+/* This is where things get fun.  JavaScript and any other language gives you lots of pre-built capabilities such as "window" below.  
+ * The gory details are at https://developer.mozilla.org/en-US/docs/Web/API/Window
+ * For our simple purposes, "window" is a variable (more later) / object (later).  window is magically available to JavaScript, as far as you're concerned
+ * for now.  It represents the window in which this script will run.  
+ * 
+ * Window has a whole bunch of "methods."  One of which is onload.  You can consider that to be magic for now. 
+ * 
+ * JavaScript has a "magic" feature such that you can tell the browser what to do when the whole page has loaded.  
+ * 
+ * The "what to do" is whatever is on the right side of the = 
+ * 
+ * Generally speaking, code runs from top to bottom. The following partially runs before the page is loaded simply because the script tag is not at the 
+ * end of the page.  Before the page loads completely, the onload function is defined but NOT run because the definition of "onload" is don't run until 
+ * the page is loaded.  
+ * 
+ * "function" is a JavaScript keyword which means that it is not arbitrary.  "function" is a keyword in many languages.
+ * 
+ * Again, generally speaking, code runs from top to bottom.  A function, however, does not run until it is "called" from other code.  In this case, 
+ * they call is hidden from you.  The "rules" are that the window will call whatever was assigned to onload when the page loads.  When the page loads, 
+ * the code inside the function runs.
+ * 
+ * The () { } are all needed, too.  They are "tokens" in JavaScript and many other languages.  They make up the syntax of the language.  All code must follow 
+ * the syntax or it won't work.  
+ * 
+ * I'll continue within the function.
+  */
+        
+    window.onload = function() {
+       
+       /* Like window, console is another magic variable / object.  It has a method "log" which will display to the browser console.  When you run 
+        * Control-Shift-I in some desktop browsers (Firefox and Chrome, for two), you'll see the "console" where this will display. 
+		* 
+		* You can use console logs to help debug / trace your code, and it is sometimes useful for that, but I recommend the Chrome / Firefox / other 
+		* debuggers over using console.log.  With that said, I use console.log fairly often.  
+		* */
+                  
+        console.log('hello world - written to console');
+		
+		/* 
+		 * The "const" (constant) keyword below is one of 3 keywords that tell JavaScript that we are about to name and define a variable--a variable in the 
+		 * general sense.  In this case "const" means that once we assign / create / name the variable, it cannot change, so it's technically a constant and 
+		 * not a variable, but that's a longer story for later.  For our immeidate purposes, it's a constant in the specific sense and a variable in the general 
+		 * sense.  
+		 * 
+		 * I name the variable below "element" because it will refer to an HTML element.  
+		 * 
+		 * JavaScript and any other code, generally speaking, executes top to bottom.  Individual lines tend to execute right to left, but this can get 
+		 * complicated.  It goes to a language's "order of operations" just like in math--exponents before multiplication before addition.  Below is an 
+		 * assignment statement indicated by '='.  In this case, the '=' should be read as "the right side is assigned to the left variable."  The '=' is an 
+		 * assignment operator.  It is NOT a logical equals.  We'll come to "equals" later.  The assignment operator can mean equals in the sense that when 
+		 * the operation is done, element equals what's on the right.  
+		 * 
+		 * document is yet another magic object.  There really aren't all that many.  window, document, and console are 3 big ones.  Also, they only have a 
+		 * relatively small number of properties / functions / methods that people often use.  "log" is a function or method in that it performs an action.  
+		 * We haven't seen properties in this example, not quite yet.  In a moment.
+		 * 
+		 * document is to some degree a subset of window.  Actually, it might be precisley a subset.  document refers to the specific HTML document--in this 
+		 * case, this file.  More precisely, it refers to this file once it is executed or rendered by the browser.  It refers to the "living" / active 
+		 * objects that this source code creates.  (All source code, when run, creates and executes variables and logic.  That's the point.)
+		 * 
+		 * window is somewhat larger in that it gives access to some of the information around the document such as the URL.  
+		 * 
+		 * Note that in the HTML "<body>," not far below, there is a div element with a long id.  document.getElementById() is a function / method that 
+		 * gives you access to the element with the id in question.  window and document give you tools to to make the page "alive" / programmable in real time, 
+		 * and interactive with the user.
+		 * 
+		 * So, when the next line is done, element is a variable / object type of variable that represents the given div element.  
+		 * 
+		 * Otherwise put, document.getElementById() "returns" an object that represents and gives access to that div.  
+		 * 
+		 * https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById
+		 * 
+		 * Return value is an "Element" object
+		 */
+        const elementArbitraryName = document.getElementById('helloDivArbitraryNameAsLongAsMatches');
+		
+		/* The "Element" object, in this case elementArb... has properties including innerHTML.  (I don't think I've ever quite learned "inner" and "outer"
+		 * HTML.)  For now all we need to know is that it's the stuff contained within in the "div" tags, just like "Press Control - U..." is contined in the 
+		 * next div.  
+		 * 
+		 * So, assign the variable, and you have your "hello world" in that JavaScript is communicating with the world.
+		 */
+		elementArbitraryName.innerHTML = 'hello world from JavaScript, in HTML';
+		
+		/* Note that if you right click "hello world..." on the rendered page (as opposed to this source code), and "Inspect Element" / "Inspect," you'll 
+		 * see the "hello world..." above as the innerHTML.  
+		 */
+		// 2021/06/19 9:55am PDT
+    }
+</script>
+
+</head>
+<body>
+    <div id='helloDivArbitraryNameAsLongAsMatches'></div>
+            
+    <div>Press Control - U or whatever view source code is (probably hard to do mobile) to see explanation</div>
+</body>
+
+<!-- first versions 2021/06/05 or just before. -->
+
+</html>

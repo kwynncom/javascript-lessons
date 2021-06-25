@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>JavaScript lesson - form filler</title>
+
+<script>
+	window.onload = function() { fillForm(); }
+	
+	function fillForm() {
+		const labele = document.querySelector('label');
+		return; // 2021/06/24 8:09pm PDT
+	}
+
+</script>
+
+
+</head>
+<body>
+	<div>
+	<p>Assume you are <span id='storedName'>Bob</span> and that's the name stored in our form filling database.</p>
+</div>
+<div>
+	<div>
+	<p>Assume the following is the form to be filled in.</p>
+	</div>
+	<div>
+		<div><label>Name</label> <input type='text' /></div>
+	</div>
+	<div>
+		<p>This JavaScript application will look for a label of "Name" and fill in the corresponding form.  See the code with Control-U or whatever your 
+		"view (HTML) source" is.  It's probably really hard to do on a mobile device.</p>
+		<p>Lesson one is to see the "labele" by putting your breakpoint in the debugger on the line after "const labele = ..."  Then refresh the page,
+		see the breakpoint stop there, and see things like the "innerHTML" property of the label.</p>
+	</div>
+</div>
+</body>
+</html>
+
