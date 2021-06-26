@@ -1,0 +1,23 @@
+tokens
+keywords
+breakpoint - Chrome Developer Tools - JavaScript
+	"pause your code with breakpoints"
+	
+code runs top to bottom, generally
+	except, for exaple, functions
+including JavaScript on web page
+window.onload does not run until full page load
+Are we running HTML or JavaScript?  Both.
+
+window.onload must be assigned a function
+
+= should be read as "is assigned"
+right side is assigned to left side
+
+window is an object predefined / prepopulated by "JavaScript" / the browser
+onload is a property of an object as shown by the . / period.  anobject.aproperty means that aproperty is a 
+property of anobject
+
+= is assignment
+== is an evaluation "Is right equal to left?"
+=== is also an eval "Is right PRECISELY EQUAL to left" in terms of same type (string) and value
