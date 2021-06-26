@@ -1,17 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'	  />
+<meta name='viewport' content='width=device-width, initial-scale=1.0' />
 
 <title>JavaScript lesson - form filler</title>
 
-<script>
-	window.onload = function() { fillForm(); }
+<script> // 2021/06/25 (Friday) 9:25pm PDT
+
+	console.log('I run first');
+
+	window.onload = function() { 
+		console.log('I run upon whole page load');
+		fillForm(); 
+	}
 	
 	function fillForm() {
-		const labele = document.querySelector('label');
-		return; // 2021/06/24 8:09pm PDT
+		const labele = document.querySelector('label'); // first label
+		if (labele.innerHTML !== 'Name') return; // If the first label is not name, it's too complicated for us right now.  Leave.  Run away!
+		// if we get this far, it's a name label
+		if (labele.for !== 'nameInput') ; // That's what you get for trying to be a good dev.  "for" is a JavaScript keyword, so use htmlFor below.	
+				// Google search: JavaScript attribute for
+				// results in https://stackoverflow.com/questions/15750290/setting-the-html-label-for-attribute-in-javascript
+				// Kwynn does not know everything.  Keep this in mind.  Repeat to yourself, and to me (Kwynn), often.
+		if (labele.htmlFor !== 'nameInput') return; // These are not the droids you are looking for.
+		// Now that I have gone to all that trouble, I realize I'm doing this backwards.  
+		// This is "forwards" or what I meant to do, below:
+		
+		const inputNameToElement = document.getElementById(labele.htmlFor);
+		const databaseNameElement = document.getElementById('storedName');
+		
+		inputNameToElement.value = databaseNameElement.innerHTML;
+				
+		
+		return;
 	}
 
 </script>
@@ -20,14 +42,26 @@
 </head>
 <body>
 	<div>
+
+	<script>
+		// This will show an error in the console (if uncommented) because storedName does not exist yet because code runs top to bottom
+		// document.getElementById('storedName').innerHTML = 'Alice';
+	</script>
+
 	<p>Assume you are <span id='storedName'>Bob</span> and that's the name stored in our form filling database.</p>
+
+
+	<script>
+		// This will run if uncommented, but let's not change Bob's name.
+		// document.getElementById('storedName').innerHTML = 'Bob 2';
+	</script>
 </div>
 <div>
 	<div>
 	<p>Assume the following is the form to be filled in.</p>
 	</div>
 	<div>
-		<div><label>Name</label> <input type='text' /></div>
+		<div><label for='nameInput'>Name</label> <input type='text' id='nameInput' /></div>
 	</div>
 	<div>
 		<p>This JavaScript application will look for a label of "Name" and fill in the corresponding form.  See the code with Control-U or whatever your 
@@ -36,6 +70,14 @@
 		see the breakpoint stop there, and see things like the "innerHTML" property of the label.</p>
 	</div>
 </div>
+
+	<div>
+		console.log('I am JavaScript lost in HTML');
+		</div>
+
+<script>
+		console.log('I run at the end of the page');
+</script>
+
 </body>
 </html>
-
